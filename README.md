@@ -1,6 +1,6 @@
-# imgBridge — LanSender / LanReceiver
+# LanSSR — LanSender / LanReceiver
 
-Rust 重写的屏幕图像文件传输工具。LanSender 将文件编码为屏幕上的棋盘格画面，LanReceiver 截取并解析画面，在不使用局域网连接的情况下传输文件。
+Rust 实现的屏幕图像文件传输工具。LanSender 将文件编码为屏幕上的棋盘格画面，LanReceiver 截取并解析画面，在不使用局域网连接的情况下传输文件。
 
 项目提供两个独立的桌面应用：**LanSender** 负责发送，**LanReceiver** 负责连续接收。两端保留原来的左右窗口布局：发送端靠左约占工作区 60% 宽、80% 高；接收端靠右约占 40% 宽、80% 高。
 
