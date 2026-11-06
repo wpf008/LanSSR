@@ -1,0 +1,21 @@
+target
+.idea
+.git
+out
+dist/
+.DS_Store
+
+# Local caches and generated reports
+__pycache__/
+*.py[cod]
+/commit-comparison-*/
+/packaging/docker/pipewire_*.orig.tar.bz2
+
+# Local editor/agent state and credentials
+.vscode/
+.codex/
+.agents/
+.aws/
+.env
+.env.*
+!.env.example

@@ -1,0 +1,57 @@
+[package]
+name = "imgbridge"
+version = "2.0.23"
+edition = "2024"
+rust-version = "1.88"
+description = "Transfer files and clipboard text through screen images"
+license = "MulanPSL-2.0"
+
+[features]
+default = ["desktop"]
+desktop = ["dep:arboard", "dep:clap", "dep:eframe", "dep:rfd", "dep:xcap", "dep:objc2-core-graphics", "dep:raw-window-handle", "dep:windows-sys"]
+
+[dependencies]
+anyhow = "1.0"
+image = { version = "0.25.10", default-features = false, features = ["png"] }
+md5 = "0.7"
+tempfile = "3.27"
+arboard = { version = "3.6", optional = true }
+clap = { version = "4.6", features = ["derive"], optional = true }
+eframe = { version = "0.33.3", default-features = false, features = ["default_fonts", "glow", "x11", "wayland"], optional = true }
+xcap = { version = "0.9.8", optional = true }
+
+[target.'cfg(not(target_os = "linux"))'.dependencies]
+rfd = { version = "0.16", optional = true }
+
+[target.'cfg(target_os = "macos")'.dependencies]
+objc2-core-graphics = { version = "0.3.2", default-features = false, features = ["CGWindow"], optional = true }
+
+[target.'cfg(target_os = "windows")'.dependencies]
+raw-window-handle = { version = "0.6.2", optional = true }
+windows-sys = { version = "0.61.2", features = ["Win32_Foundation", "Win32_Graphics_Gdi", "Win32_UI_WindowsAndMessaging", "Win32_UI_HiDpi", "Win32_System_LibraryLoader"], optional = true }
+
+[patch.crates-io]
+# Keep COM file dialogs compatible with the ole32 export present on Windows 7.
+rfd = { path = "vendor/rfd" }
+# Fixed-function fallback for Windows' built-in OpenGL 1.1 renderer.
+egui_glow = { path = "vendor/egui_glow" }
+# Negotiate legacy Wayland protocols supplied by Kylin V10 SP1.
+libwayshot-xcap = { path = "vendor/libwayshot-xcap" }
+# UKUI/KWin native Wayland screenshots and explicit X11 session detection.
+xcap = { path = "vendor/xcap" }
+# Prefer EGL on Linux X11 drivers with unusable GLX contexts.
+glutin-winit = { path = "vendor/glutin-winit" }
+
+[[bin]]
+name = "LanSender"
+path = "src/bin/lan-sender.rs"
+required-features = ["desktop"]
+
+[[bin]]
+name = "LanReceiver"
+path = "src/bin/lan-receiver.rs"
+required-features = ["desktop"]
+
+[profile.release]
+lto = "thin"
+strip = true

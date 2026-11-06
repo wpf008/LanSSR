@@ -1,0 +1,14 @@
+[Desktop Entry]
+Version=1.0
+Type=Application
+Name=LanSender
+Name[zh_CN]=LanSender
+Comment=Send files through encoded screen images
+Comment[zh_CN]=通过屏幕传输画面发送文件
+Exec=/usr/bin/LanSender
+TryExec=/usr/bin/LanSender
+Icon=lansender
+Terminal=false
+Categories=Utility;
+Keywords=screen;file;send;文件;发送;
+X-LanSSR-Desktop-Shortcut=true

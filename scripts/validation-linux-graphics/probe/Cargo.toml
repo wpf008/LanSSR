@@ -1,0 +1,17 @@
+[package]
+name = "lanbridge-linux-graphics-probe"
+version = "0.1.0"
+edition = "2024"
+rust-version = "1.88"
+
+[dependencies]
+glow = "0.16.0"
+glutin = { version = "0.32.3", default-features = false, features = ["egl", "glx", "x11"] }
+glutin-winit = { version = "0.5.0", default-features = false, features = ["egl", "glx", "x11"] }
+raw-window-handle = "0.6.2"
+winit = { version = "0.30.13", default-features = false, features = ["rwh_06", "x11"] }
+
+[patch.crates-io]
+glutin-winit = { path = "../../../vendor/glutin-winit" }
+
+[workspace]

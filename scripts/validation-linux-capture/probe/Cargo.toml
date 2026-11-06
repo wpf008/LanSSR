@@ -1,0 +1,21 @@
+[package]
+name = "lanbridge-linux-capture-probe"
+version = "0.1.0"
+edition = "2024"
+publish = false
+
+[workspace]
+
+[dependencies]
+anyhow = "1.0"
+image = { version = "0.25.10", default-features = false, features = ["png"] }
+imgbridge = { path = "../../.." }
+tempfile = "3.27"
+zbus = "=5.19.0"
+xcap = "=0.9.8"
+
+[patch.crates-io]
+egui_glow = { path = "../../../vendor/egui_glow" }
+rfd = { path = "../../../vendor/rfd" }
+xcap = { path = "../../../vendor/xcap" }
+libwayshot-xcap = { path = "../../../vendor/libwayshot-xcap" }

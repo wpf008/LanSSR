@@ -1,0 +1,15 @@
+[package]
+name = "lanbridge-wayland-legacy-probe"
+version = "0.1.0"
+edition = "2024"
+publish = false
+
+[workspace]
+
+[dependencies]
+libwayshot-xcap = { path = "../../../vendor/libwayshot-xcap" }
+xcap = "=0.9.8"
+
+[patch.crates-io]
+libwayshot-xcap = { path = "../../../vendor/libwayshot-xcap" }
+xcap = { path = "../../../vendor/xcap" }

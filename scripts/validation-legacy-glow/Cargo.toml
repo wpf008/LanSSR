@@ -1,0 +1,19 @@
+[package]
+name = "validate-legacy-glow"
+version = "0.1.0"
+edition = "2024"
+rust-version = "1.88"
+publish = false
+
+[features]
+force-legacy = ["egui_glow/legacy-test"]
+
+[dependencies]
+egui = { version = "0.33.3", default-features = false, features = ["default_fonts"] }
+egui_glow = { path = "../../vendor/egui_glow" }
+glow = "0.16.0"
+imgbridge = { path = "../..", default-features = false }
+image = { version = "0.25.10", default-features = false }
+
+[profile.dev]
+debug = 0

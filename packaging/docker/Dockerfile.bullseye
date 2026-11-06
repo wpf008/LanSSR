@@ -1,0 +1,22 @@
+ARG BASE_IMAGE=public.ecr.aws/docker/library/rust:1.88.0-bullseye
+FROM ${BASE_IMAGE}
+RUN sed -i -e 's|http://deb.debian.org|https://deb.debian.org|g' -e 's|https://deb.debian.org/debian-security|https://archive.debian.org/debian-security|g' /etc/apt/sources.list \
+    && apt-get update && apt-get install -y --no-install-recommends \
+    build-essential pkg-config libclang-dev libxcb1-dev libxcb-randr0-dev \
+    libxrandr-dev libdbus-1-dev libpipewire-0.3-dev libwayland-dev libegl-dev \
+    libxkbcommon-dev libxkbcommon-x11-dev libgl1-mesa-dev dpkg-dev \
+    binutils desktop-file-utils ca-certificates curl python3 xdg-utils zenity \
+    xdg-desktop-portal xdg-desktop-portal-gtk fonts-noto-cjk xvfb xauth \
+    && rm -rf /var/lib/apt/lists/*
+# Current libspa-rs uses SPA constants introduced after bullseye's 0.3.19.
+# Compile against verified newer headers, retaining the glibc-2.31 runtime libs.
+COPY install-pipewire-headers.py /tmp/install-pipewire-headers.py
+COPY pipewire_0.3.65.orig.tar.bz2 /tmp/pipewire.tar.bz2
+RUN python3 /tmp/install-pipewire-headers.py /tmp/pipewire.tar.bz2 \
+    && rm /tmp/pipewire.tar.bz2 /tmp/install-pipewire-headers.py
+ENV PKG_CONFIG_PATH=/opt/pipewire-headers/lib/pkgconfig
+WORKDIR /workspace
+ENV CARGO_TARGET_DIR=/workspace/target/linux-arm64
+# libwayshot links GBM as well as EGL, even when X11 capture is used.
+RUN apt-get update && apt-get install -y --no-install-recommends libgbm-dev \
+    && rm -rf /var/lib/apt/lists/*

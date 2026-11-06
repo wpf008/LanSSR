@@ -1,0 +1,14 @@
+[Desktop Entry]
+Version=1.0
+Type=Application
+Name=LanReceiver
+Name[zh_CN]=LanReceiver
+Comment=Continuously receive files through encoded screen images
+Comment[zh_CN]=通过屏幕传输画面连续接收文件
+Exec=/usr/bin/LanReceiver
+TryExec=/usr/bin/LanReceiver
+Icon=lanreceiver
+Terminal=false
+Categories=Utility;
+Keywords=screen;file;receive;文件;接收;
+X-LanSSR-Desktop-Shortcut=true
