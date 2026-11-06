@@ -1,4 +1,4 @@
-//! imgBridge's wire protocol and screen codec, independent of a desktop session.
+//! LanSSR's wire protocol and screen codec, independent of a desktop session.
 pub mod config;
 pub mod grid;
 pub mod locator;
